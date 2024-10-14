@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourUsername</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+            background-size: cover;
+            background-blend-mode: overlay;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            
+            color: #333333;
+        }
+
+        input {
+            padding: 10px;
+            margin: 20px 0;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #FF5E62;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #cc4a52;
+        }
+
+        .username-output {
+            margin-top: 20px;
+        }
+
+        #updatedUsername {
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .emoji {
+            font-size: 24px;
+            margin-top: 10px;
+            animation: bounce 0.6s infinite alternate;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        footer {
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        /* Responsive Styling */
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            input {
+                width: 100%;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            footer {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Username Generator 🔥👑</h1>
+        <p>Enter your name and get a cool username</p>
+        
+        <input type="text" id="userName" placeholder="Enter your name">
+        <button onclick="generateUsername()">Generate Username</button>
+        
+        <div class="username-output">
+            <h2>Suggested Username</h2>
+            <p id="updatedUsername"></p>
+            <p id="emoji" class="emoji"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Developed with ❤️ by <b><a href="https://linktr.ee/manash.djmm" target="_blank" style="text-decoration: none;">Manash</a></b> | YourUsername |</p>
+
+    </footer>
+
+    <script>
+        function generateUsername() {
+            const userName = document.getElementById('userName').value;
+            const updatedUsername = makeUsername(userName);
+            const randomEmoji = getRandomEmoji();
+            document.getElementById('updatedUsername').innerText = updatedUsername;
+            document.getElementById('emoji').innerText = randomEmoji;
+        }
+
+        function makeUsername(name) {
+            let username = name.replace(/[^a-zA-Z0-9_]/g, ''); // Allow letters, numbers, and underscores
+
+            // If username is longer than 7 characters, trim it
+            if (username.length > 9) {
+                username = username.slice(0, 7);
+            }
+
+            // If username is shorter than 7 characters, add random numbers/underscores
+            while (username.length < 9) {
+                const randomChar = Math.random() < 0.5 ? getRandomNumber() : '_';
+                username += randomChar;
+            }
+
+            return username;
+        }
+
+        function getRandomNumber() {
+            return Math.floor(Math.random() * 10); // Random number between 0 and 9
+        }
+
+        function getRandomEmoji() {
+            const emojis = ['😊', '👍', '✨', '💯', '🎉', '🤩', '🔥'];
+            const randomIndex = Math.floor(Math.random() * emojis.length);
+            return emojis[randomIndex];
+        }
+    </script>
+</body>
+</html>
